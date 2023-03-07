@@ -1,0 +1,54 @@
+<!--User will give an integer in nuerice field show wheather it is prime or not -->
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Question3 NUMBER IS prime or not</title>
+	<style>
+		.box{
+		display: flex;
+        flex-direction: column;
+		align-items: center;
+	}
+	</style>
+</head>
+<body>
+<div class="box">
+<h1>Number is Prime or Not</h1>
+<label for="number">Numeber</label>
+<input type="Number" id="number">
+<br>
+<button onclick="IsPrime()">Check Number</button>
+<br>
+<label for="result">Result:</label>
+<input type="text" id="result">
+</div>
+<script>
+	function IsPrime(){
+		let num=parseInt(document.getElementById("number").value);
+		if(num<=1){
+			document.getElementById("result").value="Number is not Prime";
+		}
+		else{
+	//num=num.map(Number);
+	let flag=1;
+		for(let i=2;i<=num/2;i++){
+			//console.log(num);
+			if(num%i==0){
+				flag=0;
+				break;
+			}
+		}
+		if(flag==0){
+			document.getElementById("result").value="Number is Not Prime";
+		}
+		else{
+			document.getElementById("result").value="Number is Prime";
+		}
+	 }
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrices Operation</title>
+    <style>
+        .box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        textarea{
+            border:4px solid;
+            border-radius:4px;
+            height:40px;
+            width:300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>All Matrices Operation</h1>
+        <label for="matrix1">Matrices 1 : </label>
+        <textarea id="matrix1"></textarea>
+        <br>
+        <label for="matrix2">Matrices 2 : </label>
+        <textarea id="matrix2"></textarea>
+        <br>
+        <label for="addition"> addition :</label>
+        <button id="addition">Add matrix</button>
+        <br>
+        <label for="subtraction">subtraction : </label>
+        <button id="subtraction">Subtract matrix</button>
+        <br>
+        <label for="Multipication">multipication : </label>
+        <button id="multiplication">Multiply matrix</button>
+        <br>
+        <label for="result">result :</label>
+        <textarea id="result"></textarea>
+    </div>
+    <script>
+        let sum = document.getElementById("addition");
+        let sub = document.getElementById("subtraction");
+        let mul = document.getElementById("multiplication");
+        let matrix1, matrix2;
+
+        let getData = () => {
+            matrix1 = document.getElementById("matrix1").value.trim();
+            matrix2 = document.getElementById("matrix2").value.trim();
+
+            matrix1 = matrix1.split("\n").map(row => row.split(" ").map(Number));
+            matrix2 = matrix2.split("\n").map(row => row.split(" ").map(Number));
+
+            if (matrix1.length !== matrix2.length || matrix1[0].length !== matrix2[0].length) {
+                throw new Error("Matrix length should have equal");
+            }
+        }
+
+        try {
+
+            let res = "";
+            sum.onclick = async () => {
+                await getData();
+                for (let i = 0; i < matrix1.length; i++) {
+                    for (let j = 0; j < matrix1[0].length; j++) {
+                        res += matrix1[i][j] + matrix2[i][j] + " ";
+                    }
+                    res += "\n";
+                    document.getElementById("result").value = res;
+                }
+            }
+
+            //subtraction
+            sub.onclick = async () => {
+                await getData();
+                let result = "";
+                for (let i = 0; i < matrix1.length; i++) {
+                    for (let j = 0; j < matrix1[0].length; j++) {
+                        result += matrix1[i][j] - matrix2[i][j] + " ";
+                    }
+                    result += "\n";
+                }
+                document.getElementById("result").value = result.trim();
+            }
+            let ans = "";
+            mul.onclick = async () => {
+
+                await getData();
+                let N = matrix1.length;
+                let ans = new Array(N);
+                for (let k = 0; k < N; k++)
+                    ans[k] = new Array(N);
+
+                let i, j, k;
+                for (i = 0; i < matrix1.length; i++) {
+                    for (j = 0; j < matrix1.length; j++) {
+                        ans[i][j] = 0;
+                        for (k = 0; k < matrix2.length; k++)
+                            ans[i][j] += matrix1[i][k] * matrix2[k][j];
+                    }
+                }
+                ans = ans.toString();
+                console.log(ans);
+                document.getElementById("result").value = ans;
+            }
+
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            document.getElementById("matrix1").value = "";
+            document.getElementById("matrix2").value = "";
+        }
+    </script>
+</body>
+
+</html>

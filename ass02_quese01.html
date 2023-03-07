@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>dot product of two vector</title>
+</head>
+<body>
+  <h1>Dot Product of vector</h1>
+  <label for="vector1">vector 1 : </label>
+  <input type="text" id="vector1">
+  <br>
+  <label for="vector2">vector 2 : </label>
+  <input type="text" id="vector2">
+  <br>
+  <button onclick="dotproduct()">Dot product</button>
+  <br>
+  <label for="result">result:</label>
+  <input type="text" id="result" disabled>
+  <br>
+  <script>
+  	function dotproduct(){
+  		let vec1=document.getElementById("vector1").value;
+  		let vec2=document.getElementById("vector2").value;
+  		try{
+  			vec1=vec1.split(",").map(Number);
+  			vec2=vec2.split(",").map(Number);
+  			if(vec1.length!==vec2.length){
+  				throw new Error("vector should have same length");
+  			}
+  			let res=0;
+  			for(let i=0;i<vec1.length;i++){
+  				res+=vec1[i]*vec2[i];
+  			}
+  			document.getElementById("result").value=res;
+  		}catch(err){
+  			alert(err.message);
+  		}finally{
+  			document.getElementById("vector1").value="";
+  			document.getElementById("vector2").value="";
+  		}
+  	}
+  </script>
+</body>
+</html>
